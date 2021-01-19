@@ -2,6 +2,7 @@ package com.rba.pokedex.data.mapper
 
 import com.rba.pokedex.data.response.PokemonResponse
 import com.rba.pokedex.data.storage.entity.PokemonEntity
+import com.rba.pokedex.data.util.url
 import com.rba.pokedex.domain.model.PokemonModel
 
 object PokemonMapper {
@@ -48,7 +49,7 @@ object PokemonMapper {
 
     private fun transformPokemonResponseToModel(pokemonResponse: PokemonResponse): PokemonModel {
         pokemonResponse.apply {
-            return PokemonModel(name, page, url)
+            return PokemonModel(name, page, url.url())
         }
     }
 

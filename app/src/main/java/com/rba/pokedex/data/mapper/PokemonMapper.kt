@@ -16,7 +16,7 @@ object PokemonMapper {
         return pokemonEntityList
     }
 
-    private fun transformPokemonModelToEntity(pokemonModel: PokemonModel): PokemonEntity {
+    fun transformPokemonModelToEntity(pokemonModel: PokemonModel): PokemonEntity {
         pokemonModel.apply {
             return PokemonEntity(name, page, url)
         }

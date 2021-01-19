@@ -11,11 +11,7 @@ data class PokemonDetailEntity(
     val weight: Int,
     val experience: Int,
     val types: List<TypeResponse>,
-    val hp: Int,
-    val attack: Int,
-    val defense: Int,
-    val speed: Int,
-    val exp: Int
+    val stats: List<Stats>
 ) {
     data class TypeResponse(
         val slot: Int,
@@ -23,6 +19,15 @@ data class PokemonDetailEntity(
     )
 
     data class Type(
+        val name: String
+    )
+
+    data class Stats(
+        val baseStat: Int,
+        val stat: Stat
+    )
+
+    data class Stat(
         val name: String
     )
 

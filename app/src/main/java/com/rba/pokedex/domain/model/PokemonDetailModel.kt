@@ -20,11 +20,6 @@ data class PokemonDetailModel(
     @Parcelize
     data class TypeModel(
         val slot: Int,
-        val type: TypeItem
-    ) : Parcelable
-
-    @Parcelize
-    data class TypeItem(
         val name: String
     ) : Parcelable
 

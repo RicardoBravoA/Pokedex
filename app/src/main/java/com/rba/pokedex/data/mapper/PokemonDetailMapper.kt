@@ -2,6 +2,7 @@ package com.rba.pokedex.data.mapper
 
 import com.rba.pokedex.data.response.PokemonDetailResponse
 import com.rba.pokedex.data.storage.entity.PokemonDetailEntity
+import com.rba.pokedex.data.util.Constant
 import com.rba.pokedex.domain.model.PokemonDetailModel
 
 object PokemonDetailMapper {
@@ -75,7 +76,73 @@ object PokemonDetailMapper {
     }
 
     fun transformResponseToModel(pokemonDetailResponse: PokemonDetailResponse): PokemonDetailModel {
+        pokemonDetailResponse.apply {
+            return PokemonDetailModel(
+                id,
+                name,
+                height,
+                weight,
+                experience,
+                transformDetailTypeResponseToTypeModelList(types),
+                hp(stats),
+                attack(stats),
+                defense(stats),
+                speed(stats)
+            )
+        }
+    }
 
+    private fun transformDetailTypeResponseToTypeModelList(typeResponseList: List<PokemonDetailResponse.TypeResponse>)
+            : List<PokemonDetailModel.TypeModel> {
+        val typeModelList = mutableListOf<PokemonDetailModel.TypeModel>()
+
+        typeResponseList.forEach {
+            typeModelList.add(transformDetailTypeResponseToTypeModel(it))
+        }
+        return typeModelList
+    }
+
+    private fun transformDetailTypeResponseToTypeModel(typeResponse: PokemonDetailResponse.TypeResponse)
+            : PokemonDetailModel.TypeModel {
+        typeResponse.apply {
+            return PokemonDetailModel.TypeModel(slot, typeResponse.type.name)
+        }
+    }
+
+    private fun hp(stats: List<PokemonDetailResponse.Stats>): Int {
+        stats.forEach { stat ->
+            if (stat.stat.name.equals(Constant.HP)) {
+                return stat.baseStat
+            }
+        }
+        return 0
+    }
+
+    private fun attack(stats: List<PokemonDetailResponse.Stats>): Int {
+        stats.forEach { stat ->
+            if (stat.stat.name.equals(Constant.ATTACK)) {
+                return stat.baseStat
+            }
+        }
+        return 0
+    }
+
+    private fun defense(stats: List<PokemonDetailResponse.Stats>): Int {
+        stats.forEach { stat ->
+            if (stat.stat.name.equals(Constant.DEFENSE)) {
+                return stat.baseStat
+            }
+        }
+        return 0
+    }
+
+    private fun speed(stats: List<PokemonDetailResponse.Stats>): Int {
+        stats.forEach { stat ->
+            if (stat.stat.name.equals(Constant.SPEED)) {
+                return stat.baseStat
+            }
+        }
+        return 0
     }
 
 }

@@ -6,10 +6,7 @@ import com.rba.pokedex.domain.util.ResultType
 
 interface PokemonListRepository {
 
-    suspend fun list(
-        startDate: String,
-        endDate: String
-    ): ResultType<List<PokemonListModel>, PokemonErrorModel>
+    suspend fun list(): ResultType<List<PokemonListModel>, PokemonErrorModel>
 
-    suspend fun saveAsteroid(list: List<PokemonListModel>)
+    suspend fun save(list: List<PokemonListModel>)
 }

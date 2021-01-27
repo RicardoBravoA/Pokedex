@@ -1,21 +1,23 @@
-package com.rba.pokedex.data.source.list
+package com.rba.pokedex.data.source.detail
 
 import com.rba.pokedex.data.mapper.PokemonListMapper
 import com.rba.pokedex.data.storage.database.PokedexDao
+import com.rba.pokedex.domain.model.PokemonDetailModel
 import com.rba.pokedex.domain.model.PokemonErrorModel
 import com.rba.pokedex.domain.model.PokemonListModel
+import com.rba.pokedex.domain.repository.PokemonDetailRepository
 import com.rba.pokedex.domain.repository.PokemonListRepository
 import com.rba.pokedex.domain.util.ResultType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class PokemonListLocalDataSource(private val pokedexDao: PokedexDao) : PokemonListRepository {
+class PokemonDetailLocalDataSource(private val pokedexDao: PokedexDao) : PokemonDetailRepository {
 
-    override suspend fun list(page: Int): ResultType<PokemonListModel, PokemonErrorModel> {
+    override suspend fun detail(name: String): ResultType<PokemonDetailModel, PokemonErrorModel> {
         return withContext(Dispatchers.IO) {
 
             try {
-                val response = pokedexDao.getPokemonByPage(page)
+                val response = pokedexDao.getAllPokemon(page)
                 return@withContext ResultType.Success(
                     PokemonListMapper.transformEntityToModel(
                         response
@@ -27,7 +29,7 @@ class PokemonListLocalDataSource(private val pokedexDao: PokedexDao) : PokemonLi
         }
     }
 
-    override suspend fun save(list: PokemonListModel) {
+    override suspend fun save(pokemonDetailModel: PokemonDetailModel) {
         //Do nothing
     }
 

@@ -15,8 +15,8 @@ object ErrorUtil {
 
         return when (errorException.kind) {
             RetrofitException.Kind.HTTP -> errorException.getErrorBodyAs(PokemonErrorModel::class.java)!!
-            RetrofitException.Kind.NETWORK -> PokemonErrorModel(0, "An error occurred")
-            else -> PokemonErrorModel(0, "An error occurred")
+            RetrofitException.Kind.NETWORK -> PokemonErrorModel()
+            else -> PokemonErrorModel()
         }
     }
 }

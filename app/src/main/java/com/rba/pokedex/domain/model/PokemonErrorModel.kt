@@ -5,6 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class PokemonErrorModel(
-    val code: Int,
-    val message: String?
+    val code: Int = 0,
+    val message: String? = "An error ocurred"
 ) : Parcelable

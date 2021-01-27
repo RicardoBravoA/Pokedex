@@ -27,7 +27,7 @@ class PokemonListLocalDataSource(private val pokedexDao: PokedexDao) : PokemonLi
         }
     }
 
-    override suspend fun save(list: List<PokemonListModel>) {
+    override suspend fun save(list: PokemonListModel) {
         TODO("Not yet implemented")
     }
 

@@ -38,10 +38,10 @@ object PokemonMapper {
         }
     }
 
-    fun transformResponseToModel(pokemonResponseList: List<PokemonResponse>): List<PokemonModel> {
+    fun transformResponseToModel(pokemonResponseList: List<PokemonResponse>?): List<PokemonModel> {
         val pokemonModelList = mutableListOf<PokemonModel>()
 
-        pokemonResponseList.forEach {
+        pokemonResponseList?.forEach {
             pokemonModelList.add(transformPokemonResponseToModel(it))
         }
         return pokemonModelList

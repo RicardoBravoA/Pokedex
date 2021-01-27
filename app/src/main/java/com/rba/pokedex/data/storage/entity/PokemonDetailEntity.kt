@@ -3,7 +3,7 @@ package com.rba.pokedex.data.storage.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "pokemon-detail")
+@Entity(tableName = "detail")
 data class PokemonDetailEntity(
     @PrimaryKey val id: Int,
     val name: String,

@@ -1,7 +1,7 @@
 package com.rba.pokedex.data.source.list
 
+import com.rba.pokedex.data.mapper.PokemonErrorMapper
 import com.rba.pokedex.data.mapper.PokemonListMapper
-import com.rba.pokedex.data.mapper.PokemonMapper
 import com.rba.pokedex.data.network.ApiManager
 import com.rba.pokedex.data.storage.database.PokedexDao
 import com.rba.pokedex.data.util.ErrorUtil
@@ -33,7 +33,7 @@ class PokemonListRemoteDataSource(private val pokedexDao: PokedexDao) : PokemonL
                     )
                 } else {
                     val error = RetrofitErrorUtil.parseError(response)!!
-                    ResultType.Error(.transformResponseToModel(error))
+                    ResultType.Error(PokemonErrorMapper.transformResponseToModel(error))
                 }
 
             } catch (t: Throwable) {

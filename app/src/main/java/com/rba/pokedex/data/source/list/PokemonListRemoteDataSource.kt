@@ -1,8 +1,11 @@
 package com.rba.pokedex.data.source.list
 
 import com.rba.pokedex.data.mapper.PokemonListMapper
+import com.rba.pokedex.data.mapper.PokemonMapper
 import com.rba.pokedex.data.network.ApiManager
 import com.rba.pokedex.data.storage.database.PokedexDao
+import com.rba.pokedex.data.util.ErrorUtil
+import com.rba.pokedex.data.util.RetrofitErrorUtil
 import com.rba.pokedex.domain.model.PokemonErrorModel
 import com.rba.pokedex.domain.model.PokemonListModel
 import com.rba.pokedex.domain.repository.PokemonListRepository
@@ -17,20 +20,20 @@ class PokemonListRemoteDataSource(private val pokedexDao: PokedexDao) : PokemonL
             try {
                 val response = ApiManager.get().pokemonList(page)
                 if (response.isSuccessful) {
-                    val pictureOfTheDayResponse = response.body()!!
-                    savePicture(
-                        PictureMapper.transformResponseToModel(
-                            pictureOfTheDayResponse
+                    val response = response.body()!!
+                    save(
+                        PokemonListMapper.transformResponseToModel(
+                            response
                         )
                     )
                     ResultType.Success(
-                        PictureMapper.transformResponseToModel(
-                            pictureOfTheDayResponse
+                        PokemonListMapper.transformResponseToModel(
+                            response
                         )
                     )
                 } else {
                     val error = RetrofitErrorUtil.parseError(response)!!
-                    ResultType.Error(ErrorMapper.transformResponseToModel(error))
+                    ResultType.Error(.transformResponseToModel(error))
                 }
 
             } catch (t: Throwable) {

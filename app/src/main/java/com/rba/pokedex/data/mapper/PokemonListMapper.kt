@@ -1,5 +1,6 @@
 package com.rba.pokedex.data.mapper
 
+import com.rba.pokedex.data.response.PokemonListResponse
 import com.rba.pokedex.data.response.PokemonResponse
 import com.rba.pokedex.data.storage.entity.PokemonEntity
 import com.rba.pokedex.domain.model.PokemonListModel
@@ -25,12 +26,12 @@ object PokemonListMapper {
         )
     }
 
-    fun transformResponseToModel(pokemonResponseList: List<PokemonResponse>): PokemonListModel {
+    fun transformResponseToModel(pokemonListResponse: PokemonListResponse): PokemonListModel {
         return PokemonListModel(
             null,
             null,
             null,
-            PokemonMapper.transformResponseToModel(pokemonResponseList)
+            PokemonMapper.transformResponseToModel(pokemonListResponse.results)
         )
     }
 

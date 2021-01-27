@@ -22,13 +22,13 @@ class PokemonListLocalDataSource(private val pokedexDao: PokedexDao) : PokemonLi
                     )
                 )
             } catch (t: Throwable) {
-                return@withContext ResultType.Error(ErrorModel())
+                return@withContext ResultType.Error(PokemonErrorModel())
             }
         }
     }
 
     override suspend fun save(list: PokemonListModel) {
-        TODO("Not yet implemented")
+        //Do nothing
     }
 
 }

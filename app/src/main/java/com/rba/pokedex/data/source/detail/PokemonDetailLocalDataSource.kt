@@ -1,12 +1,10 @@
 package com.rba.pokedex.data.source.detail
 
-import com.rba.pokedex.data.mapper.PokemonListMapper
+import com.rba.pokedex.data.mapper.PokemonDetailMapper
 import com.rba.pokedex.data.storage.database.PokedexDao
 import com.rba.pokedex.domain.model.PokemonDetailModel
 import com.rba.pokedex.domain.model.PokemonErrorModel
-import com.rba.pokedex.domain.model.PokemonListModel
 import com.rba.pokedex.domain.repository.PokemonDetailRepository
-import com.rba.pokedex.domain.repository.PokemonListRepository
 import com.rba.pokedex.domain.util.ResultType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,9 +15,9 @@ class PokemonDetailLocalDataSource(private val pokedexDao: PokedexDao) : Pokemon
         return withContext(Dispatchers.IO) {
 
             try {
-                val response = pokedexDao.getAllPokemon(page)
+                val response = pokedexDao.getPokemonDetail(name)
                 return@withContext ResultType.Success(
-                    PokemonListMapper.transformEntityToModel(
+                    PokemonDetailMapper.transformEntityToModel(
                         response
                     )
                 )

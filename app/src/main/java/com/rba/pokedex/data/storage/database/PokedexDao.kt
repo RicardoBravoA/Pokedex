@@ -21,4 +21,7 @@ interface PokedexDao {
 
     @Query("SELECT * FROM detail WHERE name = :name")
     suspend fun getPokemonDetail(name: String): PokemonDetailEntity
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPokemonDetail(pokemonDetailEntity: PokemonDetailEntity)
 }

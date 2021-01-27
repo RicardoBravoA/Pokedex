@@ -1,5 +1,6 @@
 package com.rba.pokedex.data.source.list
 
+import com.rba.pokedex.data.mapper.PokemonListMapper
 import com.rba.pokedex.data.storage.database.PokedexDao
 import com.rba.pokedex.domain.model.PokemonErrorModel
 import com.rba.pokedex.domain.model.PokemonListModel
@@ -8,15 +9,15 @@ import com.rba.pokedex.domain.util.ResultType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class PokemonListLocalDataSource(private val pokedexDao: PokedexDao): PokemonListRepository {
+class PokemonListLocalDataSource(private val pokedexDao: PokedexDao) : PokemonListRepository {
 
-    override suspend fun list(): ResultType<List<PokemonListModel>, PokemonErrorModel> {
+    override suspend fun list(page: Int): ResultType<PokemonListModel, PokemonErrorModel> {
         return withContext(Dispatchers.IO) {
 
             try {
-                val response = asteroidDao.getAsteroidList(startDate, endDate)
+                val response = pokedexDao.getAllPokemon(page)
                 return@withContext ResultType.Success(
-                    AsteroidMapper.transformEntityToModel(
+                    PokemonListMapper.transformEntityToModel(
                         response
                     )
                 )

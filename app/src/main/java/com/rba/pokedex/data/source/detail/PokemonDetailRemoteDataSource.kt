@@ -1,5 +1,6 @@
 package com.rba.pokedex.data.source.detail
 
+import com.rba.pokedex.data.mapper.PokemonDetailMapper
 import com.rba.pokedex.data.mapper.PokemonErrorMapper
 import com.rba.pokedex.data.mapper.PokemonListMapper
 import com.rba.pokedex.data.network.ApiManager
@@ -44,22 +45,14 @@ class PokemonDetailRemoteDataSource(private val pokedexDao: PokedexDao) : Pokemo
         }
     }
 
-    override suspend fun save(list: PokemonListModel) {
-        return withContext(Dispatchers.IO) {
-            pokedexDao.insertPokemon(
-                PokemonListMapper.transformModelToEntity(list)
-            )
-        }
-    }
-
     override suspend fun detail(name: String): ResultType<PokemonDetailModel, PokemonErrorModel> {
         TODO("Not yet implemented")
     }
 
     override suspend fun save(pokemonDetailModel: PokemonDetailModel) {
         return withContext(Dispatchers.IO) {
-            pokedexDao.insertPokemon(
-                PokemonListMapper.transformModelToEntity(list)
+            pokedexDao.insertPokemonDetail(
+                PokemonDetailMapper.transformModelToEntity(pokemonDetailModel)
             )
         }
     }

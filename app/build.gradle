@@ -36,6 +36,9 @@ android {
         includeAndroidResources = true
         returnDefaultValues = true
     }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {

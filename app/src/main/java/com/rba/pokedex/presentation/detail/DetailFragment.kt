@@ -1,12 +1,11 @@
-package com.rba.pokedex
+package com.rba.pokedex.presentation.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
+import com.rba.pokedex.R
 
 class DetailFragment : Fragment() {
 

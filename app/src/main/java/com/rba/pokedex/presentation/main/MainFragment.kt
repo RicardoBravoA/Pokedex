@@ -1,29 +1,47 @@
 package com.rba.pokedex.presentation.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModelProvider
 import com.rba.pokedex.R
+import com.rba.pokedex.databinding.FragmentMainBinding
+import com.rba.pokedex.domain.model.PokemonModel
 
 class MainFragment : Fragment() {
 
+    private val mainViewModel: MainViewModel by lazy {
+        ViewModelProvider(this, MainViewModelFactory(requireActivity().application)).get(
+            MainViewModel::class.java
+        )
+    }
+
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        val binding = FragmentMainBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+
+        val mainAdapter = MainAdapter(::pokemonClick)
+
+        binding.pokemonRecyclerView.adapter = mainAdapter
+
+        mainViewModel.pokemonList.observe(viewLifecycleOwner, {
+            Log.i("z- data", it.toString())
+            mainAdapter.submitList(it)
+        })
+
+
+
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        view.findViewById<Button>(R.id.button_first).setOnClickListener {
-            findNavController().navigate(R.id.action_MainFragment_to_DetailFragment)
-        }
+    private fun pokemonClick(pokemonModel: PokemonModel) {
+        Log.i("z- pokemon", pokemonModel.toString())
     }
+
 }

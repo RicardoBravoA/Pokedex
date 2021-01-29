@@ -13,13 +13,13 @@ interface PokedexDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPokemon(pokemonList: List<PokemonEntity>)
 
-    @Query("SELECT * FROM Pokemon WHERE page = :page")
+    @Query("SELECT * FROM pokemon_table WHERE page = :page")
     suspend fun getPokemonByPage(page: Int): List<PokemonEntity>
 
-    @Query("SELECT * FROM Pokemon WHERE page <= :page")
+    @Query("SELECT * FROM pokemon_table WHERE page <= :page")
     suspend fun getAllPokemon(page: Int): List<PokemonEntity>
 
-    @Query("SELECT * FROM detail WHERE name = :name")
+    @Query("SELECT * FROM detail_table WHERE name = :name")
     suspend fun getPokemonDetail(name: String): PokemonDetailEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

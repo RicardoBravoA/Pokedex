@@ -15,7 +15,7 @@ class PokemonListLocalDataSource(private val pokedexDao: PokedexDao) : PokemonLi
         return withContext(Dispatchers.IO) {
 
             try {
-                val response = pokedexDao.getPokemonByPage(page)
+                val response = pokedexDao.getAllPokemon()
                 return@withContext ResultType.Success(
                     PokemonListMapper.transformEntityToModel(
                         response

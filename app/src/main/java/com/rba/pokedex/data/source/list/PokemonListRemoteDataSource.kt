@@ -17,7 +17,7 @@ class PokemonListRemoteDataSource(private val pokedexDao: PokedexDao) : PokemonL
 
     override suspend fun list(page: Int): ResultType<PokemonListModel, PokemonErrorModel> {
         return withContext(Dispatchers.IO) {
-            try {
+            //try {
                 val response = ApiManager.get().pokemonList(page)
                 if (response.isSuccessful) {
                     val response = response.body()!!
@@ -36,9 +36,9 @@ class PokemonListRemoteDataSource(private val pokedexDao: PokedexDao) : PokemonL
                     ResultType.Error(PokemonErrorMapper.transformResponseToModel(error))
                 }
 
-            } catch (t: Throwable) {
-                ResultType.Error(ErrorUtil.errorHandler(t))
-            }
+            //} catch (t: Throwable) {
+            //    ResultType.Error(ErrorUtil.errorHandler(t))
+            //}
         }
     }
 

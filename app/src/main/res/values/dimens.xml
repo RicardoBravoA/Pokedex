@@ -2,4 +2,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="dp_14">14dp</dimen>
     <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_6">6dp</dimen>
 </resources>

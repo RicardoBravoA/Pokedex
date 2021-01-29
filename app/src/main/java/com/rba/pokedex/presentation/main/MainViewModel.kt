@@ -22,7 +22,10 @@ class MainViewModel(private val pokemonListRepository: PokemonListRepository) : 
         viewModelScope.launch {
             try {
                 when (val result = pokemonListRepository.list(page.value!!)) {
-                    is ResultType.Success -> _pokemonList.value = result.value
+                    is ResultType.Success -> {
+                        _pokemonList.value = result.value.results
+                        page.value!!.plus(1)
+                    }
                     is ResultType.Error -> {
                         _pokemonList.value = arrayListOf()
                     }

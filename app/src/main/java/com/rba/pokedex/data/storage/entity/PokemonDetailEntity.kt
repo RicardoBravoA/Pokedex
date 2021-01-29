@@ -1,20 +1,22 @@
 package com.rba.pokedex.data.storage.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.squareup.moshi.JsonClass
 
-@Entity(tableName = "detail")
+@Entity(tableName = "detail_table")
 data class PokemonDetailEntity(
     @PrimaryKey val id: Int,
-    val name: String,
-    val height: Int,
-    val weight: Int,
-    val experience: Int,
-    val types: List<TypeResponseEntity>,
-    val hp: Int,
-    val attack: Int,
-    val defense: Int,
-    val speed: Int
+    @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "height") val height: Int,
+    @ColumnInfo(name = "weight") val weight: Int,
+    @ColumnInfo(name = "experience") val experience: Int,
+    @ColumnInfo(name = "types") val types: List<TypeResponseEntity>,
+    @ColumnInfo(name = "hp") val hp: Int,
+    @ColumnInfo(name = "attack") val attack: Int,
+    @ColumnInfo(name = "defense") val defense: Int,
+    @ColumnInfo(name = "speed") val speed: Int
 ) {
     data class TypeResponseEntity(
         val slot: Int,

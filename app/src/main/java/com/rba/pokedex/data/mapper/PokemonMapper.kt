@@ -18,7 +18,7 @@ object PokemonMapper {
 
     fun transformPokemonModelToEntity(pokemonModel: PokemonModel): PokemonEntity {
         pokemonModel.apply {
-            return PokemonEntity(name, page, url)
+            return PokemonEntity(name, url)
         }
 
     }
@@ -34,7 +34,7 @@ object PokemonMapper {
 
     private fun transformPokemonEntityToModel(pokemonEntity: PokemonEntity): PokemonModel {
         pokemonEntity.apply {
-            return PokemonModel(name, page, url)
+            return PokemonModel(name, url)
         }
     }
 
@@ -49,7 +49,7 @@ object PokemonMapper {
 
     private fun transformPokemonResponseToModel(pokemonResponse: PokemonResponse): PokemonModel {
         pokemonResponse.apply {
-            return PokemonModel(name, page, url.url())
+            return PokemonModel(name, url.url())
         }
     }
 

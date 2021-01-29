@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.rba.pokedex.R
 import com.rba.pokedex.databinding.FragmentMainBinding
 import com.rba.pokedex.domain.model.PokemonModel
 
@@ -31,13 +30,10 @@ class MainFragment : Fragment() {
         binding.pokemonRecyclerView.adapter = mainAdapter
 
         mainViewModel.pokemonList.observe(viewLifecycleOwner, {
-            Log.i("z- data", it.toString())
             mainAdapter.submitList(it)
         })
 
-
-
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return binding.root
     }
 
     private fun pokemonClick(pokemonModel: PokemonModel) {

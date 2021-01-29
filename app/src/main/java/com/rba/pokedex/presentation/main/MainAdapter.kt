@@ -28,6 +28,7 @@ class MainAdapter(private val pokemonClick: (pokemonModel: PokemonModel) -> Unit
 
         fun bind(pokemonModel: PokemonModel) {
             binding.pokemon = pokemonModel
+            binding.executePendingBindings()
         }
 
         companion object {

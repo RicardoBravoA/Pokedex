@@ -18,6 +18,10 @@ class MainViewModel(private val pokemonListRepository: PokemonListRepository) : 
 
     private val page: MutableLiveData<Int> = MutableLiveData(1)
 
+    init {
+        getData()
+    }
+
     private fun getData() {
         viewModelScope.launch {
             try {

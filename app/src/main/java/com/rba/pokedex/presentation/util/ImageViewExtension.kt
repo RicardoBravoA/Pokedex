@@ -16,8 +16,8 @@ fun AppCompatImageView.paletteCard(url: String, paletteCard: MaterialCardView) {
                 .use(BitmapPalette.Profile.MUTED_LIGHT)
                 .intoCallBack { palette ->
                     val rgb = palette?.dominantSwatch?.rgb
-                    if (rgb != null) {
-                        paletteCard.setCardBackgroundColor(rgb)
+                    rgb?.let {
+                        paletteCard.setCardBackgroundColor(it)
                     }
                 }.crossfade(true)
         ).into(this)
